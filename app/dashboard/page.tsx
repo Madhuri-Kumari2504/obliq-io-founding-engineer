@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type ComplianceStatus = "Healthy" | "Warning" | "At Risk";
 
@@ -77,16 +78,51 @@ const navigation = [
 ];
 
 export default function DashboardPage() {
+  const router = useRouter();
+
   const [activeNav, setActiveNav] = useState("Dashboard");
+
+  /*
+   * ==========================================
+   * AUTHENTICATION PROTECTION
+   * ==========================================
+   *
+   * If the user has not logged in, redirect
+   * them to the login page.
+   */
+  useEffect(() => {
+    const authenticated = localStorage.getItem("obliq-auth");
+
+    if (authenticated !== "true") {
+      router.replace("/login");
+    }
+  }, [router]);
+
+  /*
+   * ==========================================
+   * LOGOUT
+   * ==========================================
+   */
+  function handleLogout() {
+    localStorage.removeItem("obliq-auth");
+    router.replace("/login");
+  }
 
   return (
     <main className="min-h-screen bg-[#f7f8fa] text-slate-900">
       <div className="flex min-h-screen">
-        {/* SIDEBAR */}
+
+        {/* ==========================================
+            SIDEBAR
+        ========================================== */}
+
         <aside className="hidden w-64 border-r border-slate-200 bg-white lg:flex lg:flex-col">
-          {/* Logo */}
+
+          {/* LOGO */}
+
           <div className="flex h-20 items-center border-b border-slate-200 px-6">
             <div className="flex items-center gap-3">
+
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-950 text-sm font-bold text-white">
                 O
               </div>
@@ -95,20 +131,25 @@ export default function DashboardPage() {
                 <p className="text-lg font-semibold tracking-tight">
                   Obliq-io
                 </p>
+
                 <p className="text-[11px] text-slate-500">
                   Compliance Platform
                 </p>
               </div>
+
             </div>
           </div>
 
-          {/* Navigation */}
+          {/* NAVIGATION */}
+
           <nav className="flex-1 px-4 py-6">
+
             <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">
               Workspace
             </p>
 
             <div className="space-y-1">
+
               {navigation.map((item) => {
                 const active = activeNav === item;
 
@@ -133,7 +174,10 @@ export default function DashboardPage() {
                   </button>
                 );
               })}
+
             </div>
+
+            {/* SYSTEM */}
 
             <p className="mb-3 mt-10 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">
               System
@@ -146,32 +190,67 @@ export default function DashboardPage() {
               <span className="h-2 w-2 rounded-full bg-slate-300" />
               Settings
             </button>
+
           </nav>
 
-          {/* User */}
+          {/* ==========================================
+              USER PROFILE + LOGOUT
+          ========================================== */}
+
           <div className="border-t border-slate-200 p-4">
+
+            {/* USER */}
+
             <div className="flex items-center gap-3 rounded-xl bg-slate-50 p-3">
+
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-200 text-xs font-semibold">
                 MK
               </div>
 
-              <div className="min-w-0">
+              <div className="min-w-0 flex-1">
+
                 <p className="truncate text-sm font-medium">
                   Madhuri Kumari
                 </p>
+
                 <p className="truncate text-xs text-slate-500">
                   Administrator
                 </p>
+
               </div>
+
             </div>
+
+            {/* LOGOUT BUTTON */}
+
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="mt-3 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm text-slate-500 transition hover:bg-red-50 hover:text-red-600"
+            >
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 text-xs">
+                ↪
+              </span>
+
+              Logout
+            </button>
+
           </div>
+
         </aside>
 
-        {/* MAIN CONTENT */}
+        {/* ==========================================
+            MAIN CONTENT
+        ========================================== */}
+
         <section className="flex min-w-0 flex-1 flex-col">
+
           {/* TOP BAR */}
+
           <header className="flex min-h-20 items-center justify-between border-b border-slate-200 bg-white px-5 sm:px-8">
+
             <div>
+
               <p className="text-xs font-medium text-slate-500">
                 Workspace / Dashboard
               </p>
@@ -179,9 +258,11 @@ export default function DashboardPage() {
               <h1 className="mt-1 text-xl font-semibold tracking-tight sm:text-2xl">
                 Compliance Overview
               </h1>
+
             </div>
 
             <div className="flex items-center gap-3">
+
               <button
                 type="button"
                 className="hidden rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 sm:block"
@@ -195,13 +276,21 @@ export default function DashboardPage() {
               >
                 + Add Task
               </button>
+
             </div>
+
           </header>
 
-          {/* DASHBOARD */}
+          {/* ==========================================
+              DASHBOARD
+          ========================================== */}
+
           <div className="flex-1 p-5 sm:p-8">
-            {/* Greeting */}
+
+            {/* GREETING */}
+
             <div className="mb-7">
+
               <p className="text-sm text-slate-500">
                 Sunday, August 23, 2026
               </p>
@@ -213,10 +302,15 @@ export default function DashboardPage() {
               <p className="mt-1 text-sm text-slate-500">
                 Here is the latest overview of your compliance operations.
               </p>
+
             </div>
 
-            {/* KPI CARDS */}
+            {/* ==========================================
+                KPI CARDS
+            ========================================== */}
+
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+
               <StatCard
                 label="Total Clients"
                 value="24"
@@ -244,14 +338,23 @@ export default function DashboardPage() {
                 description="Requires attention"
                 trend="down"
               />
+
             </div>
 
-            {/* MAIN GRID */}
+            {/* ==========================================
+                MAIN GRID
+            ========================================== */}
+
             <div className="mt-6 grid gap-6 xl:grid-cols-[1.5fr_1fr]">
+
               {/* COMPLIANCE */}
+
               <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+
                 <div className="flex items-start justify-between">
+
                   <div>
+
                     <p className="text-xs font-medium uppercase tracking-wider text-slate-400">
                       Compliance
                     </p>
@@ -263,6 +366,7 @@ export default function DashboardPage() {
                     <p className="mt-1 text-sm text-slate-500">
                       Current status across major compliance areas.
                     </p>
+
                   </div>
 
                   <button
@@ -271,42 +375,62 @@ export default function DashboardPage() {
                   >
                     View all
                   </button>
+
                 </div>
 
                 <div className="mt-6 space-y-5">
+
                   {complianceData.map((item) => (
+
                     <div key={item.name}>
+
                       <div className="mb-2 flex items-center justify-between">
+
                         <div className="flex items-center gap-2">
+
                           <span className="text-sm font-medium">
                             {item.name}
                           </span>
 
                           <StatusBadge status={item.status} />
+
                         </div>
 
                         <span className="text-sm font-semibold">
                           {item.percentage}%
                         </span>
+
                       </div>
 
                       <div className="h-2 overflow-hidden rounded-full bg-slate-100">
+
                         <div
                           className="h-full rounded-full bg-slate-900 transition-all"
                           style={{
                             width: `${item.percentage}%`,
                           }}
                         />
+
                       </div>
+
                     </div>
+
                   ))}
+
                 </div>
+
               </section>
 
-              {/* AI ASSISTANT */}
+              {/* ==========================================
+                  AI ASSISTANT
+              ========================================== */}
+
               <section className="rounded-2xl bg-slate-950 p-6 text-white shadow-sm">
+
                 <div className="flex items-center justify-between">
+
                   <div>
+
                     <p className="text-xs font-medium uppercase tracking-wider text-slate-400">
                       AI Workspace
                     </p>
@@ -314,11 +438,13 @@ export default function DashboardPage() {
                     <h3 className="mt-1 text-lg font-semibold">
                       Compliance Assistant
                     </h3>
+
                   </div>
 
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10">
                     ✦
                   </div>
+
                 </div>
 
                 <p className="mt-5 text-sm leading-6 text-slate-300">
@@ -327,6 +453,7 @@ export default function DashboardPage() {
                 </p>
 
                 <div className="mt-5 rounded-xl border border-white/10 bg-white/5 p-3">
+
                   <p className="text-xs text-slate-400">
                     Suggested question
                   </p>
@@ -334,6 +461,7 @@ export default function DashboardPage() {
                   <p className="mt-2 text-sm">
                     Which compliance tasks need attention this week?
                   </p>
+
                 </div>
 
                 <button
@@ -342,15 +470,25 @@ export default function DashboardPage() {
                 >
                   Open AI Assistant
                 </button>
+
               </section>
+
             </div>
 
-            {/* LOWER GRID */}
+            {/* ==========================================
+                LOWER GRID
+            ========================================== */}
+
             <div className="mt-6 grid gap-6 xl:grid-cols-[1.5fr_1fr]">
+
               {/* TASKS */}
+
               <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+
                 <div className="flex items-start justify-between">
+
                   <div>
+
                     <p className="text-xs font-medium uppercase tracking-wider text-slate-400">
                       Operations
                     </p>
@@ -358,6 +496,7 @@ export default function DashboardPage() {
                     <h3 className="mt-1 text-lg font-semibold">
                       Recent tasks
                     </h3>
+
                   </div>
 
                   <button
@@ -366,15 +505,20 @@ export default function DashboardPage() {
                   >
                     View tasks
                   </button>
+
                 </div>
 
                 <div className="mt-5 divide-y divide-slate-100">
+
                   {tasks.map((task) => (
+
                     <div
                       key={task.title}
                       className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between"
                     >
+
                       <div className="min-w-0">
+
                         <p className="truncate text-sm font-medium">
                           {task.title}
                         </p>
@@ -382,23 +526,33 @@ export default function DashboardPage() {
                         <p className="mt-1 truncate text-xs text-slate-500">
                           {task.client}
                         </p>
+
                       </div>
 
                       <div className="flex items-center gap-3">
+
                         <PriorityBadge priority={task.priority} />
 
                         <span className="text-xs text-slate-400">
                           {task.due}
                         </span>
+
                       </div>
+
                     </div>
+
                   ))}
+
                 </div>
+
               </section>
 
               {/* ACTIVITY */}
+
               <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+
                 <div>
+
                   <p className="text-xs font-medium uppercase tracking-wider text-slate-400">
                     Activity
                   </p>
@@ -406,9 +560,11 @@ export default function DashboardPage() {
                   <h3 className="mt-1 text-lg font-semibold">
                     Recent activity
                   </h3>
+
                 </div>
 
                 <div className="mt-5 space-y-5">
+
                   <Activity
                     title="GST documents uploaded"
                     description="Apex Technologies"
@@ -432,14 +588,23 @@ export default function DashboardPage() {
                     description="Orbit Retail Systems"
                     time="Yesterday"
                   />
+
                 </div>
+
               </section>
+
             </div>
 
-            {/* CLIENT OVERVIEW */}
+            {/* ==========================================
+                CLIENT OVERVIEW
+            ========================================== */}
+
             <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
                 <div>
+
                   <p className="text-xs font-medium uppercase tracking-wider text-slate-400">
                     Client360
                   </p>
@@ -452,6 +617,7 @@ export default function DashboardPage() {
                     Monitor client health and compliance status from one
                     workspace.
                   </p>
+
                 </div>
 
                 <button
@@ -460,9 +626,11 @@ export default function DashboardPage() {
                 >
                   View clients
                 </button>
+
               </div>
 
               <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
                 <ClientCard
                   name="Apex Technologies"
                   health="92%"
@@ -486,18 +654,23 @@ export default function DashboardPage() {
                   health="61%"
                   status="At Risk"
                 />
+
               </div>
+
             </section>
+
           </div>
+
         </section>
+
       </div>
     </main>
   );
 }
 
-/* ---------------------------------- */
-/* STAT CARD */
-/* ---------------------------------- */
+/* ==========================================
+   STAT CARD
+========================================== */
 
 function StatCard({
   label,
@@ -512,11 +685,14 @@ function StatCard({
 }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+
       <p className="text-xs font-medium uppercase tracking-wider text-slate-400">
         {label}
       </p>
 
-      <p className="mt-3 text-3xl font-semibold tracking-tight">{value}</p>
+      <p className="mt-3 text-3xl font-semibold tracking-tight">
+        {value}
+      </p>
 
       <p
         className={`mt-2 text-xs ${
@@ -529,15 +705,20 @@ function StatCard({
       >
         {description}
       </p>
+
     </div>
   );
 }
 
-/* ---------------------------------- */
-/* STATUS BADGE */
-/* ---------------------------------- */
+/* ==========================================
+   STATUS BADGE
+========================================== */
 
-function StatusBadge({ status }: { status: ComplianceStatus }) {
+function StatusBadge({
+  status,
+}: {
+  status: ComplianceStatus;
+}) {
   const styles = {
     Healthy: "bg-emerald-50 text-emerald-700",
     Warning: "bg-amber-50 text-amber-700",
@@ -553,9 +734,9 @@ function StatusBadge({ status }: { status: ComplianceStatus }) {
   );
 }
 
-/* ---------------------------------- */
-/* PRIORITY BADGE */
-/* ---------------------------------- */
+/* ==========================================
+   PRIORITY BADGE
+========================================== */
 
 function PriorityBadge({
   priority,
@@ -577,9 +758,9 @@ function PriorityBadge({
   );
 }
 
-/* ---------------------------------- */
-/* ACTIVITY */
-/* ---------------------------------- */
+/* ==========================================
+   ACTIVITY
+========================================== */
 
 function Activity({
   title,
@@ -592,22 +773,32 @@ function Activity({
 }) {
   return (
     <div className="flex gap-3">
+
       <div className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-slate-900" />
 
       <div className="min-w-0">
-        <p className="text-sm font-medium">{title}</p>
 
-        <p className="mt-1 text-xs text-slate-500">{description}</p>
+        <p className="text-sm font-medium">
+          {title}
+        </p>
 
-        <p className="mt-1 text-[11px] text-slate-400">{time}</p>
+        <p className="mt-1 text-xs text-slate-500">
+          {description}
+        </p>
+
+        <p className="mt-1 text-[11px] text-slate-400">
+          {time}
+        </p>
+
       </div>
+
     </div>
   );
 }
 
-/* ---------------------------------- */
-/* CLIENT CARD */
-/* ---------------------------------- */
+/* ==========================================
+   CLIENT CARD
+========================================== */
 
 function ClientCard({
   name,
@@ -620,7 +811,9 @@ function ClientCard({
 }) {
   return (
     <div className="rounded-xl border border-slate-200 p-4 transition hover:border-slate-300 hover:shadow-sm">
+
       <div className="flex items-start justify-between gap-3">
+
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-xs font-semibold">
           {name
             .split(" ")
@@ -630,25 +823,40 @@ function ClientCard({
         </div>
 
         <StatusBadge status={status} />
+
       </div>
 
-      <p className="mt-4 text-sm font-medium">{name}</p>
+      <p className="mt-4 text-sm font-medium">
+        {name}
+      </p>
 
       <div className="mt-3">
+
         <div className="mb-1 flex justify-between text-xs">
-          <span className="text-slate-400">Health</span>
-          <span className="font-medium">{health}</span>
+
+          <span className="text-slate-400">
+            Health
+          </span>
+
+          <span className="font-medium">
+            {health}
+          </span>
+
         </div>
 
         <div className="h-1.5 overflow-hidden rounded-full bg-slate-100">
+
           <div
             className="h-full rounded-full bg-slate-900"
             style={{
               width: health,
             }}
           />
+
         </div>
+
       </div>
+
     </div>
   );
 }

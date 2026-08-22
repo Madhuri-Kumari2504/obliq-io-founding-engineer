@@ -73,7 +73,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
 
-          {/* Dashboard Button */}
+          {/* Open Dashboard */}
           <Link
             href="/dashboard"
             className="hidden rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/10 sm:inline-flex"
@@ -81,9 +81,12 @@ export default function Navbar() {
             Open Dashboard
           </Link>
 
-          {/* Get Started */}
+          {/* ============================= */}
+          {/* GET STARTED → LOGIN */}
+          {/* ============================= */}
+
           <Link
-            href="/dashboard"
+            href="/login"
             className="rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:scale-105 hover:bg-white/90"
           >
             Get started
