@@ -6,11 +6,11 @@
 
 <p align="center">
   <a href="https://obliq-io-founding-engineer.vercel.app/">
-    <strong>🚀 Live Demo</strong>
+    🚀 Live Demo
   </a>
   &nbsp;&nbsp;•&nbsp;&nbsp;
   <a href="https://github.com/Madhuri-Kumari2504/obliq-io-founding-engineer">
-    <strong>💻 GitHub Repository</strong>
+    💻 GitHub Repository
   </a>
 </p>
 
@@ -20,18 +20,18 @@
 
 | Resource | Link |
 |---|---|
-| 🚀 Live Application | https://obliq-io-founding-engineer.vercel.app/ |
-| 💻 GitHub Repository | https://github.com/Madhuri-Kumari2504/obliq-io-founding-engineer |
-| ▲ Vercel Deployment | https://vercel.com/obliq2/obliq-io-founding-engineer |
-| 📦 Main Branch | https://github.com/Madhuri-Kumari2504/obliq-io-founding-engineer/tree/main |
+| 🚀 Live Application | [Obliq-io Live Demo](https://obliq-io-founding-engineer.vercel.app/) |
+| 💻 GitHub Repository | [GitHub Repository](https://github.com/Madhuri-Kumari2504/obliq-io-founding-engineer) |
+| ▲ Vercel Deployment | [Vercel Project](https://vercel.com/obliq2/obliq-io-founding-engineer) |
+| 🌿 Main Branch | [GitHub Main Branch](https://github.com/Madhuri-Kumari2504/obliq-io-founding-engineer/tree/main) |
 
 ---
 
-# 📌 Overview
+## 📌 Overview
 
 This project was developed as part of the **Obliq-io Founding Engineer task**.
 
-The objective was to create a polished, responsive and interactive product experience that presents Obliq-io as a modern platform for managing compliance, documents, clients and AI-assisted workflows.
+The goal was to build a polished, responsive and interactive SaaS product experience that presents Obliq-io as a modern platform for managing compliance, documents, clients and AI-assisted business workflows.
 
 The implementation focuses on:
 
@@ -43,13 +43,14 @@ The implementation focuses on:
 - Client management
 - Task management
 - Document intelligence
-- Production deployment
+- Compliance monitoring
+- Production deployment with Vercel
 
 ---
 
-# ✨ Key Features
+## ✨ Key Features
 
-## 🏠 Landing Page
+### 🏠 Landing Page
 
 The landing page provides a complete product introduction with:
 
@@ -60,42 +61,52 @@ The landing page provides a complete product introduction with:
 - Feature presentation
 - Workflow visualization
 - AI Compliance section
-- Document Intelligence
+- Document Intelligence section
 - Compliance Control Center
 - Calls-to-action
 
 ---
 
-## 🤖 AI Compliance Workspace
+### 🤖 AI Compliance Workspace
 
 The application includes an interactive AI-oriented workspace designed around compliance workflows.
 
-Users can interact with the AI interface to explore compliance-related questions and responses.
+Users can enter compliance-related queries and interact with the interface to explore contextual responses.
 
-### Highlights
+#### Highlights
 
 - AI query input
 - AI response area
 - Thinking/loading state
 - Compliance-oriented responses
 - AI reasoning interface
-- Interactive workspace design
+- Interactive workspace experience
+
+> Note: The current implementation focuses on the frontend product experience and interaction flow.
 
 ---
 
-## 📄 Document Intelligence
+### 📄 Document Intelligence
 
-A dedicated section presents the concept of intelligent document processing and compliance-related document workflows.
+The Document Intelligence section presents the concept of intelligent document processing for compliance operations.
 
-The interface is designed to communicate how documents can be organized and connected to compliance operations.
+It communicates how business documents can be organized, analyzed and connected with compliance workflows.
+
+Key concepts include:
+
+- Document organization
+- Document workflow
+- Compliance documentation
+- Intelligent document processing
+- Business information management
 
 ---
 
-## 📊 Compliance Control Center
+### 📊 Compliance Control Center
 
-The Compliance Control Center provides a centralized view of compliance-related operations.
+The Compliance Control Center provides a centralized interface for monitoring compliance operations.
 
-It includes areas such as:
+It covers:
 
 - GST
 - TDS
@@ -105,14 +116,15 @@ It includes areas such as:
 - Risk indicators
 - Task status
 - Client activity
+- Compliance progress
 
 ---
 
-# 👥 Client360
+## 👥 Client360
 
-The project includes a **Client360-style dashboard** for viewing client information and compliance status.
+The project includes a **Client360-style dashboard** for viewing client information, compliance status and operational activity.
 
-### Client information
+### Client Information
 
 The dashboard provides visibility into:
 
@@ -125,7 +137,7 @@ The dashboard provides visibility into:
 - Tasks
 - Deadlines
 - Documents
-- Activity
+- Recent activity
 
 ### Task Management
 
@@ -137,13 +149,13 @@ Users can:
 - Filter tasks
 - Track compliance activities
 
-Supported task priorities include:
+### Task Priorities
 
 - High
 - Medium
 - Low
 
-Supported task statuses include:
+### Task Statuses
 
 - Open
 - In Progress
@@ -151,13 +163,13 @@ Supported task statuses include:
 
 ---
 
-# 🎯 User Experience
+## 🎯 User Experience
 
-The interface was designed with a strong focus on usability.
+The interface was designed with a strong focus on usability, responsiveness and visual consistency.
 
-### Responsive behavior
+### Responsive Design
 
-The application was tested across:
+The application was checked across:
 
 - Desktop
 - Tablet
@@ -174,12 +186,13 @@ Responsive checks included:
 - Responsive navigation
 - Responsive buttons
 - Mobile-friendly layouts
+- Proper section spacing
 
 ---
 
-# 🧩 Architecture
+## 🧩 Architecture
 
-The project uses a component-based architecture built around Next.js and React.
+The project follows a component-based architecture using Next.js and React.
 
 ```text
 obliq-io-founding-engineer/
